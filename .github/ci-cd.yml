@@ -1,0 +1,32 @@
+name: CICD_Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+  #Ejemplo con Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'  
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests 
+        strategy:
+          matrix:
+            test: [1, 2, 3]
+        run: ./test${{ matrix.test }}.sh
