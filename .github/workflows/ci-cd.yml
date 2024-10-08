@@ -16,6 +16,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'  # Especifica la versión de Node.js que necesitas
+
+      - name: Install dependencies
+        run: npm install  # Instala las dependencias de tu proyecto, si tienes un package.json
+
       - name: Make test scripts executable
         run: chmod +x ./test*.sh
 
@@ -33,6 +41,11 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'  # Especifica la versión de Node.js que necesitas
 
       - name: List permissions of test scripts
         run: ls -l ./test*.sh
