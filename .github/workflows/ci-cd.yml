@@ -14,14 +14,17 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Actualizado a v3
+        uses: actions/checkout@v3
 
       - name: Make test scripts executable
-        run: chmod +x ./test*.sh  # Cambia permisos de los scripts
+        run: |
+          chmod +x ./test1.sh
+          chmod +x ./test2.sh
+          chmod +x ./test3.sh
 
   test:
     runs-on: ubuntu-latest
-    needs: build  # Asegúrate de que el trabajo de build se complete primero
+    needs: build
 
     strategy:
       matrix:
@@ -29,7 +32,7 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Actualizado a v3
+        uses: actions/checkout@v3
 
       - name: Run tests
-        run: ./test${{ matrix.test }}.sh  # Ejecuta los scripts de prueba
+        run: ./test${{ matrix.test }}.sh
