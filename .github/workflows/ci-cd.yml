@@ -21,8 +21,7 @@ jobs:
         with:
           node-version: '16'  # Especifica la versión de Node.js que necesitas
 
-      - name: Install dependencies
-        run: npm install  # Instala las dependencias de tu proyecto, si tienes un package.json
+
 
       - name: Make test scripts executable
         run: chmod +x ./test*.sh
