@@ -1,4 +1,4 @@
-name: CI/CD Pipeline
+name: ci-cd Pipeline
 
 on:
   push:
@@ -24,11 +24,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Grant execute permissions for test scripts
+      - name: Grant execute permissions for test files
         run: chmod +x ./tests/*.sh
 
-      - name: Check file type
-        run: file ./tests/${{ matrix.test_file }}
-
       - name: Run tests in parallel
-        run: bash ./tests/${{ matrix.test_file }}
+        run: ./tests/${{ matrix.test_file }}
