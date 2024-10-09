@@ -14,9 +14,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-        
-      # Eliminar el paso de instalación de Node.js y dependencias si no es necesario
-      # Este paso solo es relevante si tienes un proyecto Node.js.
 
   test:
     runs-on: ubuntu-latest
@@ -30,5 +27,8 @@ jobs:
       - name: Grant execute permissions for test scripts
         run: chmod +x ./tests/*.sh
 
+      - name: Check file type
+        run: file ./tests/${{ matrix.test_file }}
+
       - name: Run tests in parallel
-        run: ./tests/${{ matrix.test_file }}
+        run: bash ./tests/${{ matrix.test_file }}
