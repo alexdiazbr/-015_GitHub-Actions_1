@@ -11,43 +11,32 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
-
-      - name: Set up Node.js
+        
+      - name: Set up Node.js (si es necesario)
         uses: actions/setup-node@v3
         with:
-          node-version: '16'  # Especifica la versión de Node.js que necesitas
+          node-version: '16'
+          
+      - name: Install dependencies (si es necesario)
+        run: npm install
 
-
-
-      - name: Make test scripts executable
-        run: chmod +x ./test*.sh
-
-      - name: List permissions of test scripts
-        run: ls -l ./test*.sh
-
+      - name: Run build (si es necesario)
+        run: npm run build
+        
   test:
     runs-on: ubuntu-latest
-    needs: build
-
     strategy:
       matrix:
-        test: [1, 2, 3]
-
+        test_file: [test1.sh, test2.sh, test3.sh]
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '20'  # Especifica la versión de Node.js que necesitas
+      - name: Grant execute permissions for test scripts
+        run: chmod +x ./tests/*.sh
 
-      - name: List permissions of test scripts
-        run: ls -l ./test*.sh
-
-      - name: Run tests
-        run: ./test${{ matrix.test }}.sh
+      - name: Run tests in parallel
+        run: ./tests/${{ matrix.test_file }}
