@@ -15,17 +15,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
         
-      - name: Set up Node.js (si es necesario)
-        uses: actions/setup-node@v3
-        with:
-          node-version: '16'
-          
-      - name: Install dependencies (si es necesario)
-        run: npm install
+      # Eliminar el paso de instalación de Node.js y dependencias si no es necesario
+      # Este paso solo es relevante si tienes un proyecto Node.js.
 
-      - name: Run build (si es necesario)
-        run: npm run build
-        
   test:
     runs-on: ubuntu-latest
     strategy:
