@@ -21,8 +21,6 @@ jobs:
       matrix:
         test_file: [test1.sh, test2.sh, test3.sh]
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
 
       - name: Grant execute permissions for test files
         run: chmod +x ./tests/*.sh
